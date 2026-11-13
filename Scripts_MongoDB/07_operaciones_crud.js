@@ -42,3 +42,29 @@ function eliminarUsuarioPrueba() {
 
 // Las funciones no se ejecutan automáticamente.
 // Solo se ejecutarán cuando se invoquen.
+
+
+```javascript
+// Actualizar likes de un comentario de prueba
+// $inc aumenta el valor en 1.
+
+function aumentarLikesComentario(idComentario) {
+  return db.comentarios.updateOne(
+    { _id: idComentario },
+    { $inc: { likes: 1 } }
+  );
+}
+
+// Agregar un hashtag a una publicación.
+// $push incorpora un elemento al arreglo.
+
+function agregarHashtag(idPublicacion, hashtag) {
+  return db.publicaciones.updateOne(
+    { _id: idPublicacion },
+    { $push: { hashtags: hashtag } }
+  );
+}
+
+// Estas funciones no se ejecutan automáticamente.
+// Deben utilizarse solo con registros de prueba.
+```

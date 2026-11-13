@@ -54,3 +54,33 @@ printjson(
     }
   ]).toArray()
 );
+
+
+```javascript
+// 4. Relacionar publicaciones con sus autores
+// Negocio: identificar quién crea cada contenido.
+
+print("PUBLICACIONES CON SUS AUTORES");
+
+printjson(
+  db.publicaciones.aggregate([
+    {
+      $lookup: {
+        from: "usuarios",
+        localField: "usuario_id",
+        foreignField: "_id",
+        as: "autor"
+      }
+    },
+    { $unwind: "$autor" },
+    {
+      $project: {
+        _id: 1,
+        categoria: 1,
+        nombre_autor: "$autor.nombre"
+      }
+    },
+    { $limit: 10 }
+  ]).toArray()
+);
+```

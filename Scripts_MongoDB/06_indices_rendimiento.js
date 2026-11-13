@@ -2,30 +2,30 @@
 use("ContentFlowDB");
 
 // Proyecto ContentFlow
-// Script 06: Índices y análisis de rendimiento
+// Script 06: Comparación de rendimiento
 
-// Consultar los índices existentes
+// Consultas utilizadas en la evaluación
+const filtroPublicaciones = { categoria: "Deportes" };
+const filtroComentarios = { likes: { $gt: 50 } };
+
+// Verificar los índices existentes
 print("ÍNDICES DE PUBLICACIONES");
 printjson(db.publicaciones.getIndexes());
 
 print("ÍNDICES DE COMENTARIOS");
 printjson(db.comentarios.getIndexes());
 
-// Crear índices si todavía no existen
-db.publicaciones.createIndex({ categoria: 1 });
-db.comentarios.createIndex({ likes: 1 });
-
-// Analizar el rendimiento de las consultas
-print("RENDIMIENTO: PUBLICACIONES");
+// Analizar ambas consultas con los índices actuales
+print("RENDIMIENTO DE PUBLICACIONES");
 printjson(
-  db.publicaciones
-    .find({ categoria: "Tecnología" })
+  db.publicaciones.find(filtroPublicaciones)
     .explain("executionStats")
 );
 
-print("RENDIMIENTO: COMENTARIOS");
+print("RENDIMIENTO DE COMENTARIOS");
 printjson(
-  db.comentarios
-    .find({ likes: { $gt: 10 } })
+  db.comentarios.find(filtroComentarios)
     .explain("executionStats")
 );
+
+

@@ -32,3 +32,25 @@ colecciones.forEach((nombre) => {
   print("-----------------------------");
 });
 ```
+
+```javascript
+// Procedimiento de importación original
+//
+// Herramienta: MongoDB Atlas / Compass
+// Base de datos: ContentFlowDB
+//
+// Se importaron los archivos JSON del anexo
+// a las siguientes colecciones:
+//
+// usuarios       -> usuarios.json
+// publicaciones  -> publicaciones.json
+// reacciones     -> reacciones.json
+// comentarios    -> comentarios.json
+// campanas       -> campañas.json
+//
+// Cada archivo contiene un arreglo JSON.
+// Se conservaron los identificadores _id originales.
+//
+// La importación ya fue realizada.
+// No se vuelve a ejecutar para evitar duplicados.
+```

@@ -51,3 +51,36 @@ printjson(
 );
 
 
+```javascript
+// Buscar publicaciones cuyo autor no existe.
+// Solo consulta: no modifica ni elimina documentos.
+
+print("PUBLICACIONES SIN USUARIO VÁLIDO");
+
+printjson(
+  db.publicaciones.aggregate([
+    {
+      $lookup: {
+        from: "usuarios",
+        localField: "usuario_id",
+        foreignField: "_id",
+        as: "usuario_encontrado"
+      }
+    },
+    {
+      $match: {
+        usuario_encontrado: { $size: 0 }
+      }
+    },
+    {
+      $project: {
+        _id: 1,
+        usuario_id: 1,
+        categoria: 1
+      }
+    },
+    { $limit: 20 }
+  ]).toArray()
+);
+```
+
